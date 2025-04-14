@@ -3,17 +3,20 @@ package services;
 import models.Quarto;
 import models.Reserva;
 import models.Hospede;
+import interfaces.ReservaServiceInterface;
+
 import java.util.ArrayList;
 import java.util.List;
 
-// 🔹 Classe responsável pela gestão do hotel
 public class Hotel {
     private List<Quarto> quartos;
     private List<Reserva> reservas;
+    private ReservaServiceInterface reservaService; // <- usa a interface, não a classe concreta
 
-    public Hotel() {
+    public Hotel(ReservaServiceInterface reservaService) {
         this.quartos = new ArrayList<>();
         this.reservas = new ArrayList<>();
+        this.reservaService = reservaService;
     }
 
     public void adicionarQuarto(Quarto quarto) {
@@ -22,26 +25,21 @@ public class Hotel {
 
     public void fazerReserva(Hospede hospede, Quarto quarto) {
         if (!quarto.isOcupado()) {
-            Reserva reserva = new Reserva(hospede, quarto);
+            Reserva reserva = reservaService.criarReserva(hospede, quarto); // baixo acoplamento
             reservas.add(reserva);
             reserva.reservar();
         } else {
-            System.out.println("❌ Quarto já está ocupado! Escolha outro.");
+            System.out.println("Quarto já está ocupado!");
         }
     }
 
-    public void cancelarReserva(int idReserva) {
-        for (Reserva reserva : reservas) {
-            if (reserva.getId() == idReserva) {
-                reserva.cancelar();
-                reservas.remove(reserva);
-                System.out.println("✅ Reserva ID " + idReserva + " cancelada com sucesso!");
-                return;
-            }
-        }
-        System.out.println("❌ Reserva não encontrada.");
+    public List<Quarto> getQuartos() {
+        return quartos;
     }
 
+    public List<Reserva> getReservas() {
+        return reservas;
+    }
     public List<Quarto> getQuartosDisponiveis() {
         List<Quarto> disponiveis = new ArrayList<>();
         for (Quarto q : quartos) {
@@ -51,8 +49,15 @@ public class Hotel {
         }
         return disponiveis;
     }
-
-    public List<Reserva> getReservas() {
-        return reservas;
+    public void cancelarReserva(int idReserva) {
+        for (Reserva reserva : reservas) {
+            if (reserva.getId() == idReserva) {
+                reserva.cancelar();
+                reservas.remove(reserva);
+                System.out.println("✅ Reserva cancelada com sucesso!");
+                return;
+            }
+        }
+        System.out.println("❌ Reserva não encontrada.");
     }
 }

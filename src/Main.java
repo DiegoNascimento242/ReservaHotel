@@ -1,5 +1,7 @@
 import models.*;
 import services.Hotel;
+import services.ReservaService;
+import interfaces.ReservaServiceInterface;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
@@ -7,7 +9,10 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        Hotel hotel = new Hotel();
+        //Hotel hotel = new Hotel();
+        ReservaServiceInterface reservaService = new ReservaService();
+
+        Hotel hotel = new Hotel(reservaService);
 
         // Adicionando quartos ao hotel
         hotel.adicionarQuarto(new Suite(101, true));
