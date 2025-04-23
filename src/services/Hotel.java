@@ -16,15 +16,16 @@ public class Hotel {
     /* Protected Variations:
      A classe Hotel depende da abstração (interface ReservaServiceInterface),
     e não de uma implementação específica (ReservaService), protegendo o sistema contra variações futuras.*/
+
     private ReservaServiceInterface reservaService; // <- usa a interface, não a classe concreta
     public Hotel(ReservaServiceInterface reservaService) {
-        //this.quartos = new ArrayList<>();
-        //this.reservas = new ArrayList<>();
+        this.quartos = new ArrayList<>();
+        this.reservas = new ArrayList<>();
         this.reservaService = reservaService;
     }
 
     public void adicionarQuarto(Quarto quarto) {
-        quartos.add(quarto);
+        this.quartos.add(quarto);
     }
 
     public void fazerReserva(Hospede hospede, Quarto quarto) {
