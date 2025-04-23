@@ -10,8 +10,8 @@ public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         //Hotel hotel = new Hotel();
-        ReservaServiceInterface reservaService = new ReservaService();
 
+        ReservaServiceInterface reservaService = new ReservaService();
         Hotel hotel = new Hotel(reservaService);
 
         // Adicionando quartos ao hotel

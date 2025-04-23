@@ -9,6 +9,8 @@ public class Suite extends Quarto {
         this.cafeDaManha = cafeDaManha;
     }
     // 🔹 Sobrescrita (Reescrita)
+
+
     @Override
     public double calcularPreco() {
         return cafeDaManha ? 300.0 : 250.0;

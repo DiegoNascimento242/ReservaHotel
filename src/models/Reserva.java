@@ -16,7 +16,9 @@ public class Reserva implements Reservavel {
     public Reserva(Hospede hospede, Quarto quarto) {
         this(hospede, quarto, LocalDate.now()); // Chamada para o outro construtor (sobrecarga)
     }
-    //polimorfismo
+
+
+    //POLIMORFISMO
     // Sobrecarga do construtor com data personalizada
     public Reserva(Hospede hospede, Quarto quarto, LocalDate dataReserva) {
         this.id = ++contadorReservas;
@@ -52,5 +54,7 @@ public class Reserva implements Reservavel {
     public LocalDate getDataReserva() {
         return dataReserva;
     }
-    //polimorfismo
+    //POLIMORFISMO
+
+
 }

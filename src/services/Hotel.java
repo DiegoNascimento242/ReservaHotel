@@ -11,11 +11,15 @@ import java.util.List;
 public class Hotel {
     private List<Quarto> quartos;
     private List<Reserva> reservas;
-    private ReservaServiceInterface reservaService; // <- usa a interface, não a classe concreta
 
+ /*=================================================================================================================*/
+    /* Protected Variations:
+     A classe Hotel depende da abstração (interface ReservaServiceInterface),
+    e não de uma implementação específica (ReservaService), protegendo o sistema contra variações futuras.*/
+    private ReservaServiceInterface reservaService; // <- usa a interface, não a classe concreta
     public Hotel(ReservaServiceInterface reservaService) {
-        this.quartos = new ArrayList<>();
-        this.reservas = new ArrayList<>();
+        //this.quartos = new ArrayList<>();
+        //this.reservas = new ArrayList<>();
         this.reservaService = reservaService;
     }
 
@@ -25,6 +29,7 @@ public class Hotel {
 
     public void fazerReserva(Hospede hospede, Quarto quarto) {
         if (!quarto.isOcupado()) {
+            // PV aplicado: criei a reserva através da interface, não diretamente com "new"
             Reserva reserva = reservaService.criarReserva(hospede, quarto); // baixo acoplamento
             reservas.add(reserva);
             reserva.reservar();
