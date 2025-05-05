@@ -20,6 +20,7 @@ public class Main {
         hotel.adicionarQuarto(new Suite(103, true));
         hotel.adicionarQuarto(new QuartoEconomico(201));
         hotel.adicionarQuarto(new QuartoEconomico(202));
+        hotel.adicionarQuarto(new Quarto (203,"Padrão"));
 
         while (true) {
             System.out.println("\n🏨 MENU:");

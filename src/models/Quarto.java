@@ -3,11 +3,7 @@ package models;
 // Classe abstrata com método abstrato, permitindo que subclasses variem o comportamento de "calcularPreco()"
 // sem afetar o restante do sistema.
 
-
-// 🔹 Classe Abstrata (não pode ser instanciada diretamente)
-
-//   PV Classe abstrato Quarto
-    public abstract class Quarto {
+    public class Quarto {
     protected int numero; // Encapsulamento: atributo protegido
     protected String tipo;
     protected boolean ocupado;
@@ -17,10 +13,11 @@ package models;
         this.tipo = tipo;
         this.ocupado = false;
     }
-    // 🔹 Método Abstrato
 
-    // PV aplicado: este método será implementado por cada tipo de Quarto (ex: Suite), permitindo flexibilidade.
-    public abstract double calcularPreco();
+    public double calcularPreco(){
+
+        return 200.0;
+    };
 
     public void ocupar() {
         this.ocupado = true;
